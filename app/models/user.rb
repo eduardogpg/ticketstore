@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   
   def set_encrypted_password
-  	self.encrypted_password = BCrypt::Password.create self.password
+  	#self.encrypted_password = BCrypt::Password.create self.password
+    self.encrypted_password = self.password
   end
 end

@@ -27,6 +27,7 @@ gem "mysql2", "~> 0.3.9"
 
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'doorkeeper'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

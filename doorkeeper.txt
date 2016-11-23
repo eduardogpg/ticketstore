@@ -1,0 +1,20 @@
+irb -r oauth2
+callback 
+
+app_id = "fd6f916e00eaf2868bba1206ba28785b66f9bf4f0f02d6b8fb462a5c85ad0b7e"
+secret_id = "b8c48b6be1cdb5e247ad6e560a0b16c2c7ba21c1ddb3e2478281d87e2b8ccae6"
+
+client = OAuth2::Client.new(app_id, secret_id, site:"http://localhost:3000/")
+client.auth_code.authorize_url(:redirect_uri => 'urn:ietf:wg:oauth:2.0:oob')
+
+
+token = client.password.get_token('eduardo', 'eduardo')
+
+puts token.token
+puts token.refresh_token
+token.expired?
+new_token = token.refresh!
+
+
+
+https://github.com/intridea/oauth2
