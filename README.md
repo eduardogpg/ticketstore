@@ -1,54 +1,73 @@
-#Steps
+# Ouath example
 
-- rails new ticketstore
-- Gemfile -> gem "mysql2", "~> 0.3.9"
+This is a simple rails app using oauth method for API, the gem doorkeeper is integrated in this project.
+
+Mandatories technologies and gems.
+
+  - Rails 4
+  - Doorkeeper
+  
+Optional technologies and gems.
+	
+  * mysql2
+  * bcrypt
+
+### Run Application
+
 - bundle install
 - rake db:create
-- rails generate scaffold User username:string email:string encrypted_password:string
 - rake db:migrate
-- rails generate scaffold Concert name:string description:string release_date:datetime
-- rake db:migrate
+- rails server
 
+### Test authorization
 
+First generate a new user 
 
-### Doorkeeper example
+- http://localhost:3000/users/new
 
-- gem 'doorkeeper'
-- bundle install
-- rails generate doorkeeper:install
-
-
-colocamos: 
-resource_owner_authenticator
-
-Intentamos acceder a la siguiente URL :
-http://localhost:3000//oauth/authorize
-
-
-Creamos nuestra aplicación.
-Instalamos la gema Aout2
-
-
+Generate a new App
 
 - http://localhost:3000/oauth/applications/new
 
 
-App Id:
-fd6f916e00eaf2868bba1206ba28785b66f9bf4f0f02d6b8fb462a5c85ad0b7e
+Store the app id and the secret.
 
-Secret:
-b8c48b6be1cdb5e247ad6e560a0b16c2c7ba21c1ddb3e2478281d87e2b8ccae6
+Install Ouath gem
 
+```Ruby
+gem install oauth2
+```
 
-https://github.com/doorkeeper-gem/doorkeeper/wiki/Enable-Refresh-Token-Credentials#doorkeeper-implementation
-
-https://github.com/doorkeeper-gem/doorkeeper/wiki/Customizing-Token-Expiration#access-token
-
-https://github.com/doorkeeper-gem/doorkeeper
-
-https://github.com/doorkeeper-gem/doorkeeper/wiki/Customizing-routes
-
-https://auth0.com/docs/tokens/refresh-token
+If you want see all the documentantion of [ouath gem]
 
 
-[doorkeeper]: <https://github.com/doorkeeper-gem/doorkeeper>
+```
+app = "bd20f2f0c3554a872fd2de7d05520d1123edc35ee3ee969aed7142fa35dae102"
+secret = "c281e0b1a4f2c130c8877f977e7bbd614de4fe3dfb32c17ab22e42e681ada1c9"
+
+client = OAuth2::Client.new(app, secret, site:"http://localhost:3000/")
+token = client.password.get_token('username', 'password')
+
+puts token.token
+puts token.refresh_token
+
+new_token = token.refresh! if token.expired?
+puts new_token
+
+```
+
+When you have the access token you just need create a request to with the next struct
+  -  http://localhost:3000/api/concerts?access_token=token
+
+
+
+	
+[doorkeeper documentation]: <https://github.com/doorkeeper-gem/doorkeeper>
+[doorkeeper implementation]: <https://github.com/doorkeeper-gem/doorkeeper/wiki/Enable-Refresh-Token-Credentials#doorkeeper-implementation>
+[doorkeeper endpoints]: <https://github.com/doorkeeper-gem/doorkeeper/wiki/API-endpoint-descriptions-and-examples>
+[customizing token expiration]: <https://github.com/doorkeeper-gem/doorkeeper/wiki/Customizing-Token-Expiration#access-token>
+[customizing routes]: <https://github.com/doorkeeper-gem/doorkeeper/wiki/Customizing-routes>
+[ouath refresh]: <https://auth0.com/docs/tokens/refresh-token>
+[ouath gem]: <https://github.com/intridea/oauth2>
+
+
