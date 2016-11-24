@@ -64,6 +64,18 @@ class UsersController < ApplicationController
   def login
   end
   
+  def main
+  end
+
+  def authorize
+    user = User.find_by(username: params[:username])
+    if user.is_valid_password?(params[:password])
+      render :main
+    else
+      redirect_to root_path
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

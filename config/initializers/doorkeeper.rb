@@ -9,11 +9,11 @@ Doorkeeper.configure do
 
   resource_owner_from_credentials do |routes|
     user = User.find_by(username: params[:username])
-    if user && user.encrypted_password == params[:password].to_s
+    if user && user.is_valid_password?(params[:password].to_s) 
       user
     end
   end
-
+  
   use_refresh_token
   
 end

@@ -15,3 +15,11 @@ new_token = token.refresh!
 
 
 https://github.com/intridea/oauth2
+
+
+
+1.-Crear la ruta de la API para que podamos enviar los cursos de los usuarios.
+2.-Integrar doorkeeper para la OAuth.s
+3.-Generar una nueva aplicación.
+4.-Creamos el cliente.
+5.-Agregamos los permisos para que un usuario puede logearse.

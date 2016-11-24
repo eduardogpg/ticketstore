@@ -1,1 +1,7 @@
 <h3>Login</h3>
+
+<%= form_for(:user, :url => {:controller => 'users', :action => 'authorize'}) do |f| %>
+  <p> Username:</br> <%= f.text_field :username%> </p>
+  <p> Password:</br> <%= f.password_field :password%></p>
+  <%= f.submit :Signup %>
+<% end %>

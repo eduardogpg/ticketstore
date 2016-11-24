@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :users
   
   get "/login", to: "users#login"
+  get "/main", to: "users#main"
+
+  post "/authorize", to: "users#authorize"
 
   # GET       /oauth/authorize/:code
   # GET       /oauth/authorize
