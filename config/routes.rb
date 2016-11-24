@@ -1,15 +1,13 @@
 Rails.application.routes.draw do
+  
   root :to => 'users#login'
   
   use_doorkeeper
   resources :concerts
   resources :users
   
-  get "/login", to: "users#login"
-  get "/main", to: "users#main"
-
-  post "/authorize", to: "users#authorize"
-
+  
+  #======== OUAth endpoints =========
   # GET       /oauth/authorize/:code
   # GET       /oauth/authorize
   # POST      /oauth/authorize
@@ -23,6 +21,11 @@ Rails.application.routes.draw do
 
   #======== API =========
   namespace :api, defaults: { format: "json"  } do
-    resources :concerts, controller: :concerts, as: :root
+    #resources :concerts
+    
+    resources :concerts, only: [:index] do
+      get :my, on: :collection
+    end
+
   end
 end

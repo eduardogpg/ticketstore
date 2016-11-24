@@ -63,8 +63,8 @@ Ok, now in a new terminal let's start the gem
 ```
 irb -r oauth2
 
-app = "bd20f2f0c3554a872fd2de7d05520d1123edc35ee3ee969aed7142fa35dae102"
-secret = "c281e0b1a4f2c130c8877f977e7bbd614de4fe3dfb32c17ab22e42e681ada1c9"
+app = "fd6f916e00eaf2868bba1206ba28785b66f9bf4f0f02d6b8fb462a5c85ad0b7e"
+secret = "b8c48b6be1cdb5e247ad6e560a0b16c2c7ba21c1ddb3e2478281d87e2b8ccae6"
 
 client = OAuth2::Client.new(app, secret, site:"http://localhost:3000/")
 token = client.password.get_token('username', 'password')

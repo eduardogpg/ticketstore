@@ -5,5 +5,8 @@ class Api::ConcertsController < Api::ApiController
   def index
   	@concerts = Concert.all
   end
+
+  def my
+  end
   
 end
